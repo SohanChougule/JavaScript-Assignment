@@ -40,6 +40,9 @@ function RegFormValidation() {
     } 
     else {
         confirm("Are you sure ?")
+        localStorage.setItem("uname",uname.value);
+        localStorage.setItem("password",password.value);
+        
         localStorage.setItem("fname",fname.value);
         localStorage.setItem("lname",lname.value);
         localStorage.setItem("address",address.value);
@@ -48,4 +51,20 @@ function RegFormValidation() {
         window.location.href = "login.html"
 
     }
+}
+
+function LoginFormValidation(){
+    let uname = document.getElementById("luname").value;
+    let password = document.getElementById("lpassword").value;
+    if(localStorage.getItem("uname")==uname){
+        if(localStorage.getItem("password")==password){
+            sessionStorage.setItem("luname",uname);
+            window.location.href = "index.html";
+        }else{
+            document.getElementById("loginerrmsg").innerHTML = "password does not match";
+        }
+    }else{
+        document.getElementById("loginerrmsg").innerHTML = "username not found";
+    }
+    
 }
