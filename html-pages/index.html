@@ -1,12 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Assignment</title>
+    <title>Home</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-    
+    Hello
+    <button onclick="logout()">Logout</button>
+    <h4>To-Do</h4>
+    <div class="addTaskFormcontainer">
+        <h2>Add To-Do task</h2>
+        <form name="ToDoForm" action="">
+            <p>
+                Task Name : <br><input type="text" class="inp" id="taskName">
+                <br>
+                <br>
+                Task Details : <br>
+                <textarea type="text" class="inp" id="taskdetails" cols="30" rows="5" >
+                </textarea>
+                <br>
+                <br>
+                Date : <br><input type="date" class="inp" id="taskdate" min=Date()>
+                <br>
+                <br>
+                <span class="errmsg" id="taskerrmsg"></span>
+
+                <br>
+                <br>
+                <input type="button" value="Submit" name="Submit" id="subbtn" onclick="addTask()">
+                <input type="reset" value="Reset" name="Reset" />
+
+                <script>var today = new Date();
+                    var dd = today.getDate();
+                    var mm = today.getMonth() + 1; //January is 0!
+                    var yyyy = today.getFullYear();
+                    if (dd < 10) {
+                        dd = '0' + dd
+                    }
+                    if (mm < 10) {
+                        mm = '0' + mm
+                    }
+                    today = yyyy + '-' + mm + '-' + dd;
+                    document.getElementById("taskdate").setAttribute("min", today);</script>
+            </p>
+        </form>
+    </div>
+
+    <div class="viewTaskFormcontainer">
+       
+        <h2>View To-Do task</h2>
+        
+    </div>
 </body>
+<script src="../js/validate.js"></script>
+
 </html>

@@ -27,3 +27,12 @@
 #subbtn{
     margin-right: 20px;
 }
+
+.addTaskFormcontainer{
+    width:25%;
+    padding-left: 10px;
+    padding-right: 10px;   
+    border-style: double;
+    background-color: lightsteelblue;
+    float: left;
+}
