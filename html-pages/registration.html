@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registeration</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="regFormcontainer">
+    <h2>Registeration Form</h2>
+    <form name = "reForm" action="" >
+
+        <p>
+            User Name : <br><input type="text" class="inp" id="uname" >
+            <br>
+            <span class="errmsg" id="unameerrmsg"></span>
+            <br>Password : <br><input type="password" class="inp" id="password" >
+            <br>
+            <br>
+            Confirm Password : <br><input type="password" class="inp" id="cpassword" >
+            <br>
+            <span class="errmsg" id="passerrmsg"></span>
+            <br>
+            Last Name : <br><input type="text" class="inp" id="lname" >
+            <br>
+            <span class="errmsg" id="lnameerrmsg"></span>
+            <br>
+            Gender :
+            <select name="gender" id="gender">
+                <option value="">-</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Others">Others</option>
+                
+            </select>
+            
+            <br>
+
+
+            <span class="errmsg" id="gendererrmsg"></span> 
+            <br>
+            Address : <textarea name="address" id="address" cols="30" rows="5" ></textarea>
+            <br>
+            <span class="errmsg" id="adderrmsg"></span>
+            <br>
+            Profile Image : <input type="file" id="profileimage" name="profileimage" accept="image/*" required>
+            <br>
+            <br>
+            <input type="button" value="Submit" name="Submit" id="subbtn" onclick="RegFormValidation()">
+            <input type="reset" value="Reset" name="Reset" />
+            <p>Already a user ? <a href="login.html" >Login Here</a></p>
+        </p>
+
+    </form>
+</div>
+</body>
+<script src="../js/validate.js"></script>
+
+</html>

@@ -1,0 +1,29 @@
+.regFormcontainer{
+    margin-top: 40px;
+    margin-left: 33%;
+    width:300px;
+    background-color: cadetblue;
+    color: cornsilk;
+    padding-top: 20px;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-bottom: 20px;
+}
+
+.errmsg{
+    color: crimson;
+}
+.inp{
+    width:90%;
+}
+
+#address{
+    width: 90%;
+}
+
+#gender{
+    width:72%;
+}
+#subbtn{
+    margin-right: 20px;
+}
