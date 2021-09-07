@@ -112,9 +112,18 @@ function LoginFormValidation() {
 }
 
 function displayTask() {
-
+    let arr = JSON.parse(localStorage.getItem("task"));
+    let userid = sessionStorage.getItem("userid");
+    let txt = "<th>Task name</th><th>Task details</th><th>Task date</th>";
+    for(let x of arr){
+        if(x["userid"] == userid){
+            txt += "<tr><td>" + x["task"] +"</td><td>" + x["details"] +"</td><td>" + x["date"] +"</td> </tr>"
+        }
+    }
+    document.getElementById("ViewTable").innerHTML = txt;
 
 }
+displayTask();
 
 function addTask() {
     let tname = document.getElementById("taskName");
@@ -136,6 +145,7 @@ function addTask() {
         let task = JSON.parse(localStorage.getItem("task"));
         task.push(obj)
         localStorage.setItem("task",JSON.stringify(task));
+        alert("Task Added");
         window.location.reload();
     }
     

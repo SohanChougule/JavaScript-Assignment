@@ -36,3 +36,16 @@
     background-color: lightsteelblue;
     float: left;
 }
+
+.viewTaskFormcontainer{
+    border-style: double;
+    width: 35%;
+    float:left;
+    margin-left: 20px;
+    background-color: honeydew;
+}
+
+#ViewTable td, th{
+    border-style:solid;
+    border-color: rgb(44, 18, 68);
+}
