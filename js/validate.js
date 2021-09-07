@@ -1,11 +1,10 @@
 
-if(JSON.parse(localStorage.getItem("users")) == null ){
-    localStorage.setItem("users" ,JSON.stringify([]));
+if (JSON.parse(localStorage.getItem("users")) == null) {
+    localStorage.setItem("users", JSON.stringify([]));
 
 }
-if(JSON.parse(localStorage.getItem("task")) == null ){
-    localStorage.setItem("task" ,JSON.stringify([]));
-
+if (JSON.parse(localStorage.getItem("task")) == null) {
+    localStorage.setItem("task", JSON.stringify([]));
 }
 
 function RegFormValidation() {
@@ -19,22 +18,23 @@ function RegFormValidation() {
     let gender = document.getElementById("gender");
     let address = document.getElementById("address");
 
-    if (uname.value == "") {
-        document.getElementById("unameerrmsg").innerText = "Please Enter User Name";
-        fname.focus();
-    } else {
-        let arr = JSON.parse(localStorage.getItem("users"));
-        if (typeof arr !== null) {
-            for (let x of arr) {
-                if (x["uname"] == uname.value) {
-                    document.getElementById("unameerrmsg").innerText = "Username already taken please try another username";
-                    fname.focus();
-                }
+    let arr = JSON.parse(localStorage.getItem("users"));
+    let flag = true;
+    if (typeof arr !== null) {
+        for (let x of arr) {
+            if (x["uname"] == uname.value) {
+                flag = false;
+                break;
             }
         }
-
     }
-    if (password.value == "") {
+    if(!flag){
+        document.getElementById("unameerrmsg").innerText = "Username already taken please try another username";
+        uname.focus();
+    }else if (uname.value == "") {
+        document.getElementById("unameerrmsg").innerText = "Please Enter User Name";
+        fname.focus();
+    } else if (password.value == "") {
         document.getElementById("passerrmsg").innerText = "Please Enter Password";
         password.focus();
     } else if (cpassword.value == "") {
@@ -45,11 +45,7 @@ function RegFormValidation() {
     } else if (fname.value == "") {
         document.getElementById("fnameerrmsg").innerText = "Please Enter First Name";
         fname.focus();
-    } else if (fname.value == "") {
-        document.getElementById("fnameerrmsg").innerText = "Please Enter First Name";
-        fname.focus();
-    }
-    else if (lname.value == "") {
+    } else if (lname.value == "") {
         lname.focus();
         document.getElementById("lnameerrmsg").innerText = "Please Enter Last Name";
     } else if (gender.value == "") {
@@ -60,6 +56,7 @@ function RegFormValidation() {
         address.focus();
         document.getElementById("adderrmsg").innerText = "Please Enter Address";
     } else {
+
 
         confirm("Are you sure ?")
         let obj = {
@@ -76,6 +73,7 @@ function RegFormValidation() {
         localStorage.setItem("users", JSON.stringify(users));
 
         window.location.href = "login.html"
+
 
     }
 }
@@ -111,18 +109,19 @@ function LoginFormValidation() {
     }
 }
 
+
 function displayTask() {
     let arr = JSON.parse(localStorage.getItem("task"));
     let userid = sessionStorage.getItem("userid");
     let txt = "<th>Task name</th><th>Task details</th><th>Task date</th>";
     let newarr = []
-    for(let x of arr){
-        if(x["userid"] == userid){
+    for (let x of arr) {
+        if (x["userid"] == userid) {
             newarr.push(x);
-            txt += "<tr><td>" + x["task"] +"</td><td>" + x["details"] +"</td><td>" + x["date"] +"</td> </tr>"
+            txt += "<tr><td>" + x["task"] + "</td><td>" + x["details"] + "</td><td>" + x["date"] + "</td> </tr>"
         }
     }
-    sessionStorage.setItem("task",newarr); 
+    sessionStorage.setItem("task", JSON.stringify(newarr));
     document.getElementById("ViewTable").innerHTML = txt;
 
 }
@@ -132,40 +131,41 @@ function addTask() {
     let tname = document.getElementById("taskName");
     let tdetails = document.getElementById("taskdetails");
     let tdate = document.getElementById("taskdate");
-    
-    if(tname.value == ""){
+
+    if (tname.value == "") {
         document.getElementById("taskerrmsg").innerHTML = "Please Enter Task";
-    }else if(tdetails.value == ""){
+    } else if (tdetails.value == "") {
         document.getElementById("taskerrmsg").innerHTML = "Please Enter Task details";
-    }else if(tdate.value == ""){
+    } else if (tdate.value == "") {
         document.getElementById("taskerrmsg").innerHTML = "Please Enter Date";
-    }else{
+    } else {
         let userid = sessionStorage.getItem("userid");
         let task = JSON.parse(localStorage.getItem("task"));
-        let cnt =0
-        for(x of task){
-            if(x["userid"] == userid){
+        let cnt = 0
+        for (x of task) {
+            if (x["userid"] == userid) {
                 cnt++
             }
         }
-        obj = {"userid": userid,
-                "taskid":cnt,
-                "task":tname.value,
-                "details":tdetails.value,
-            "date":tdate.value};
-        
-        
+        obj = {
+            "userid": userid,
+            "taskid": cnt,
+            "task": tname.value,
+            "details": tdetails.value,
+            "date": tdate.value
+        };
+
+
         task.push(obj)
-        localStorage.setItem("task",JSON.stringify(task));
+        localStorage.setItem("task", JSON.stringify(task));
         alert("Task Added");
         window.location.reload();
     }
-    
+
 
 }
 
 function logout() {
     sessionStorage.clear();
-    window.location.href = "login.html";
 }
 

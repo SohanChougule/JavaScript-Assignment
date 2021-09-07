@@ -10,9 +10,21 @@
 </head>
 
 <body>
-    Hello
-    <button onclick="logout()">Logout</button>
+    <header>
+        <div class="navbar">
+            <ul>
+                <li><a class="active" href="#">HOME</a></li>
+                <li><a href="updateTask.html">Update task</a></li>
+                <li><a href="#">Delete Task</a></li>
+                <li><a href="login.html" onclick="logout()">Logout</a></li>
+            </ul>
+        </div>
+    </header>
+    
+    <br><br>
+    
     <h4>To-Do</h4>
+    
     <div class="addTaskFormcontainer">
         <h2>Add To-Do task</h2>
         <form name="ToDoForm" action="">
@@ -58,7 +70,10 @@
             
         </table>
     </div>
+
 </body>
-<script src="../js/validate.js"></script>
+<script src="../js/validate.js">
+  
+</script>
 
 </html>

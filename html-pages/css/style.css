@@ -40,7 +40,7 @@
 .viewTaskFormcontainer{
     border-style: double;
     width: 35%;
-    float:left;
+    float:right;
     margin-left: 20px;
     background-color: honeydew;
 }
@@ -48,4 +48,48 @@
 #ViewTable td, th{
     border-style:solid;
     border-color: rgb(44, 18, 68);
+}
+
+.navbar{
+    background-color: cornsilk;
+    
+    width:100%;
+	text-align: center;
+    margin-left: 0px;
+    float :left;
+}
+
+
+.navbar ul{
+    margin-top: 0px;
+	display:inline;
+	list-style-type: none;
+	
+}
+
+.navbar li{
+    background-color: cornsilk;
+    float:left;
+    border-color: black;
+    border-style:solid;
+    border-width: 1px;
+	padding-top:15px;
+    padding-bottom:15px;
+    
+}
+
+
+.navbar a {
+    margin-left: 0px;
+	padding:15px;
+    color: rgb(189, 22, 22);
+    width: 100%;
+	text-decoration: none;
+	
+}
+
+.navbar a.active {
+    background-color: crimson;
+    color: cornsilk;
+    
 }
