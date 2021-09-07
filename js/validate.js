@@ -115,11 +115,14 @@ function displayTask() {
     let arr = JSON.parse(localStorage.getItem("task"));
     let userid = sessionStorage.getItem("userid");
     let txt = "<th>Task name</th><th>Task details</th><th>Task date</th>";
+    let newarr = []
     for(let x of arr){
         if(x["userid"] == userid){
+            newarr.push(x);
             txt += "<tr><td>" + x["task"] +"</td><td>" + x["details"] +"</td><td>" + x["date"] +"</td> </tr>"
         }
     }
+    sessionStorage.setItem("task",newarr); 
     document.getElementById("ViewTable").innerHTML = txt;
 
 }
@@ -138,11 +141,20 @@ function addTask() {
         document.getElementById("taskerrmsg").innerHTML = "Please Enter Date";
     }else{
         let userid = sessionStorage.getItem("userid");
+        let task = JSON.parse(localStorage.getItem("task"));
+        let cnt =0
+        for(x of task){
+            if(x["userid"] == userid){
+                cnt++
+            }
+        }
         obj = {"userid": userid,
+                "taskid":cnt,
                 "task":tname.value,
                 "details":tdetails.value,
-            "date":tdate.value}
-        let task = JSON.parse(localStorage.getItem("task"));
+            "date":tdate.value};
+        
+        
         task.push(obj)
         localStorage.setItem("task",JSON.stringify(task));
         alert("Task Added");
