@@ -9,13 +9,13 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body>
+<body onload="displayTask()">
     <header>
         <div class="navbar">
             <ul>
                 <li><a class="active" href="#">HOME</a></li>
-                <li><a href="updateTask.html">Update task</a></li>
-                <li><a href="#">Delete Task</a></li>
+                <li><a href="updateTask.html" >Update task</a></li>
+                <li><a href="deleteTask.html">Delete Task</a></li>
                 <li><a href="login.html" onclick="logout()">Logout</a></li>
             </ul>
         </div>
@@ -63,7 +63,7 @@
         </form>
     </div>
 
-    <div class="viewTaskFormcontainer">
+    <div class="viewTaskFormcontainer" >
        
         <h2>View To-Do task</h2>
         <table id="ViewTable">

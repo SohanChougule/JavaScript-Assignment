@@ -5,8 +5,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update task</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body onload="viewUpdate()">
     
+        <div class="navbar">
+            <ul>
+                <li><a href="index.html">HOME</a></li>
+                <li><a class="active" href="#" >Update task</a></li>
+                <li><a href="deleteTask.html">Delete Task</a></li>
+                <li><a href="login.html" onclick="logout()">Logout</a></li>
+            </ul>
+        </div>
+        <h3>Update Task</h3>
+        <table><th class="tablefield">Task id</th><th class="tablefield">Task Name</th><th class="tablefield">Task Details</th><th class="tablefield">Date</th></table>
+    <div id = "updateTaskTable"></div>
+    <br>
+    <button type="submit" onclick="updateTask()">Update</button>
 </body>
+<script src="../js/validate.js"></script>
 </html>

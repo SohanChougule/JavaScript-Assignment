@@ -43,9 +43,11 @@
     float:right;
     margin-left: 20px;
     background-color: honeydew;
+    text-align: center;
 }
 
 #ViewTable td, th{
+    width:180px;
     border-style:solid;
     border-color: rgb(44, 18, 68);
 }
@@ -92,4 +94,29 @@
     background-color: crimson;
     color: cornsilk;
     
+}
+
+.tablefield{
+    border: 2px;
+    border-style: solid;
+    width:150px
+}
+
+#updateTaskTable input{
+    margin-left: 2px;
+    margin-top: 2px;
+    width: 148px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+}
+
+#DeleteView  th{
+    border-style: solid;
+    border-width: 2px;
+}
+
+#DeleteView td{
+    border-style: solid;
+    border-width: 2px;
 }
