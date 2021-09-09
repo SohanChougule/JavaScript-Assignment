@@ -210,13 +210,40 @@ function deleteView(){
     let txt ="<tr><th>Task Id</th><th>Task</th><th>Task details</th><th>Date</th><th>Select</th></tr>"
     
     for(let x of task){
-        txt += "<tr><td style='none'>" + x["taskid"] + "</td><td>" + x["task"] + "</td><td>" + x["details"] + "</td><td>" + x["date"] + "</td><td><input type = 'checkbox' value='"+ x["taskid"] +"'</td></tr>"
+        txt += "<tr><td style='none'>" + x["taskid"] + "</td><td>" + x["task"] + "</td><td>" + x["details"] + "</td><td>" + x["date"] + "</td><td><input type = 'checkbox' class ='deleteItem' value='"+ x["taskid"] +"'</td></tr>"
     }
     document.getElementById("DeleteView").innerHTML = txt;
 }
 
 function deleteTask(){
+    let inputElements = document.getElementsByClassName("deleteItem");
+    let deltask = [];
+    for(let i=0;inputElements[i];i++){
+        if(inputElements[i].checked){
+            deltask.push(inputElements[i].value);
+        }
+    }
+    let ltask = JSON.parse(localStorage.getItem("task"));
+    let userid = sessionStorage.getItem("userid");
+    let count =0 
+    for(let x of ltask){
+        if(x["userid"]==userid){
+            for(let y of deltask)
+            {   
+                if(x["taskid"]==y){
+                    ltask.splice(count,1);
 
+                }
+
+            }
+        }
+        count++;
+    }
+    console.log(ltask);
+    localStorage.setItem("task",JSON.stringify(ltask));
+    sessionStorage.setItem("task",JSON.stringify(ltask));
+    alert("Deleted tasks");
+    window.location.reload();
 }
 
 
