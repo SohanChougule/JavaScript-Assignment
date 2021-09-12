@@ -120,3 +120,33 @@
     border-style: solid;
     border-width: 2px;
 }
+
+.userDetails th{
+    border: 1px;
+    border-style: none;
+}
+
+.userDetails td{
+    border: 1px;
+    border-style: none;
+}
+
+.userDetails table{
+    margin-top: 80px;
+    margin-left: 200px;
+    border-style: solid;
+}
+
+.updateUserDetails th{
+    border: solid;
+    border-width: 1px;
+}
+
+.updateUserDetails td{
+    border: solid;
+    border-width: 1px;
+}
+
+.updateUserDetails input{
+    border: none;
+}

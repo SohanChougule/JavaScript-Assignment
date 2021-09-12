@@ -246,6 +246,69 @@ function deleteTask(){
     window.location.reload();
 }
 
+function profileDisplay(){
+    let userid = sessionStorage.getItem("userid");
+    let users = JSON.parse(localStorage.getItem("users"));
+    let count =0;
+    for (let x of users){
+        if(count == userid){
+            console.log("user is",x["uname"]);
+            tables =document.getElementsByTagName("td");
+            tables[0].innerText = x["uname"];
+            tables[1].innerText = x["fname"] + " " + x["lname"];
+            tables[2].innerText = x["address"];
+            tables[3].innerText = x["gender"]; 
+        }
+        count++;
+    }
+}
+
+function profileEditDisplay(){
+    let userid = sessionStorage.getItem("userid");
+    let users = JSON.parse(localStorage.getItem("users"));
+    let count =0;
+    for (let x of users){
+        if(count == userid){
+            console.log("user is",x["uname"]);
+            tables =document.getElementsByTagName("input");
+            document.getElementById("username").innerText = x["uname"];
+            tables[0].value = x["fname"];
+            tables[1].value = x["lname"];
+            tables[2].value = x["address"];
+            tables[3].value = x["gender"]; 
+        }
+        count++;
+    }
+}
+
+
+
+function editProfile(){
+    let tab = document.getElementsByClassName("profileinp");
+    let users = JSON.parse(localStorage.getItem("users"));
+    let fname  = tab[0].value;
+    let lname  = tab[1].value;
+    let address  = tab[2].value;
+    let gender  = tab[3].value;
+  
+    let userid = sessionStorage.getItem("userid");
+    let count =0;
+    
+    for(let x of users){
+        console.log("in users")
+        if(count==userid){
+            x["fname"] = fname;
+            x["lname"] = lname;
+            x["address"] = address;
+            x["gender"] = gender;
+            console.log(x)
+        }
+        count++;
+    }
+    localStorage.setItem("users",JSON.stringify(users));
+    alert("Updated");
+        
+}
 
 function logout() {
     sessionStorage.clear();

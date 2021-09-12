@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body onload="profileDisplay()">
+    <div class="navbar">
+        <ul>
+            <li><a href="index.html">HOME</a></li>
+            <li><a  href="updateTask.html" >Update task</a></li>
+            <li><a href="deleteTask.html">Delete Task</a></li>
+            <li><a class="active" href="#">Profile</a></li>
+            <li><a href="login.html" onclick="logout()">Logout</a></li>
+        </ul>
+    </div>
+    <br>
+    <div class="userDetails">
+        <table>
+            <tr>
+                <th>User Name : </th>
+                <td></td>
+            </tr>
+            <tr>
+                <th>Name : </th>
+                <td></td>
+            </tr>
+            <tr>
+                <th>Address : </th>
+                <td></td>
+            </tr>
+            <tr>
+                <th>Gender : </th>
+                <td></td>
+            </tr>
+            
+        </table>
+    </div>
+    <a href="editProfile.html">Edit Profile</a>
+</body>
+<script src="../js/validate.js"></script>
+</html>
