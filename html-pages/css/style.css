@@ -150,3 +150,13 @@
 .updateUserDetails input{
     border: none;
 }
+
+.searchBar{
+    display: inline-block;
+    width:250px;
+}
+#viewSearch input{
+    margin-top: 0px;
+    width:130px;
+}
+

@@ -201,7 +201,8 @@ function updateTask(){
     console.log(ltask)
     localStorage.setItem("task",JSON.stringify(ltask));
     sessionStorage.setItem("task",JSON.stringify(ltask));
-
+    
+    alert("Updated");
 }
 
 
@@ -308,6 +309,75 @@ function editProfile(){
     localStorage.setItem("users",JSON.stringify(users));
     alert("Updated");
         
+}
+
+
+function viewBy(){
+    
+    let view = document.getElementById("viewTask").value;
+    let arr = JSON.parse(sessionStorage.getItem("task"));
+    let txt = "<th>Task name</th><th>Task details</th><th>Task date</th>";
+    if(view=="taskDate"){
+        arr.sort((a, b) => {
+            let da = new Date(a.date),
+                db = new Date(b.date);
+            return da - db;
+        });
+    }if(view=="taskName"){
+        arr.sort((a, b) => {
+            let fa = a.task.toLowerCase(),
+            fb = b.task.toLowerCase();
+
+            if (fa < fb) {
+                return -1;
+            }
+            if (fa > fb) {
+                return 1;
+            }
+            return 0;
+        });
+    }
+    for (let x of arr) {
+            txt += "<tr><td>" + x["task"] + "</td><td>" + x["details"] + "</td><td>" + x["date"] + "</td> </tr>"
+    }
+
+    document.getElementById("ViewTable").innerHTML = txt;
+}
+
+
+function searchBy(){
+    searchTaskBy = document.getElementById("searchTask").value;
+    if(searchTaskBy == "taskName"){
+        document.getElementById("viewSearch").innerHTML = "<input type = 'text' id = 'searchInpName' oninput='searchByName()' style='float:right'>";
+    }
+    if(searchTaskBy == "taskDate"){
+        document.getElementById("viewSearch").innerHTML = "<input type = 'date' id = 'searchInpName' onchange='searchByDate()' style='float:right'>";
+    }
+    
+}
+
+function searchByName(){
+    word = document.getElementById("searchInpName").value;
+    let arr = JSON.parse(sessionStorage.getItem("task"));
+    let txt = "<th>Task name</th><th>Task details</th><th>Task date</th>";    
+    for (let x of arr) {
+        if(x["task"].includes(word)){
+            txt += "<tr><td>" + x["task"] + "</td><td>" + x["details"] + "</td><td>" + x["date"] + "</td> </tr>";
+        }
+    }
+    document.getElementById("searchTable").innerHTML = txt;
+}
+
+function searchByDate(){
+    word = document.getElementById("searchInpName").value;
+    let arr = JSON.parse(sessionStorage.getItem("task"));
+    let txt = "<th>Task name</th><th>Task details</th><th>Task date</th>";    
+    for (let x of arr) {
+        if(x["date"] == word){
+            txt += "<tr><td>" + x["task"] + "</td><td>" + x["details"] + "</td><td>" + x["date"] + "</td> </tr>";
+        }
+    }
+    document.getElementById("searchTable").innerHTML = txt;
 }
 
 function logout() {
