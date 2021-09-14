@@ -348,7 +348,7 @@ function viewBy(){
     
     let view = document.getElementById("viewTask").value;
     let arr = JSON.parse(sessionStorage.getItem("task"));
-    let txt = "<th>Task name</th><th>Task details</th><th>Task date</th>";
+    let txt = "<th>Task name</th><th>Task details</th><th>Task date</th><th>Task Status</th>";
     if(view=="taskDate"){
         arr.sort((a, b) => {
             let da = new Date(a.date),
@@ -368,12 +368,47 @@ function viewBy(){
             }
             return 0;
         });
+    }if(view=="taskStatus"){
+        document.getElementById("statusSort").innerHTML = `<select name="statusTask" id="statusTask" onchange="viewStatusBy()">
+        <option value="-">-</option>
+        <option value="pending">Pending</option>
+        <option value="done">Done</option>
+        </select>`;
+
     }
     for (let x of arr) {
-            txt += "<tr><td>" + x["task"] + "</td><td>" + x["details"] + "</td><td>" + x["date"] + "</td> </tr>"
+            txt += "<tr><td>" + x["task"] + "</td><td>" + x["details"] + "</td><td>" + x["date"] + "</td><td>" + x["status"] + "</td> </tr>"
     }
 
     document.getElementById("ViewTable").innerHTML = txt;
+}
+
+function viewStatusBy(){
+    let arr = JSON.parse(sessionStorage.getItem("task"));
+    ele = document.getElementById("statusTask").value;
+    let txt = "<th>Task name</th><th>Task details</th><th>Task date</th><th>Task Status</th>";    
+    if(ele=="pending"){
+        for (let x of arr) {
+            if(x["status"]=="pending"){
+                txt += "<tr><td>" + x["task"] + "</td><td>" + x["details"] + "</td><td>" + x["date"] + "</td><td>" + x["status"] + "</td> </tr>";
+            }
+        }
+    
+    }else if(ele=="done"){
+        for (let x of arr) {
+            if(x["status"]=="done"){
+                txt += "<tr><td>" + x["task"] + "</td><td>" + x["details"] + "</td><td>" + x["date"] + "</td><td>" + x["status"] + "</td> </tr>";
+            }
+        }
+
+    }else{
+        for (let x of arr) {
+            txt += "<tr><td>" + x["task"] + "</td><td>" + x["details"] + "</td><td>" + x["date"] + "</td><td>" + x["status"] + "</td> </tr>";
+            
+        }
+    }
+    document.getElementById("ViewTable").innerHTML = txt;
+
 }
 
 
@@ -391,10 +426,10 @@ function searchBy(){
 function searchByName(){
     word = document.getElementById("searchInpName").value;
     let arr = JSON.parse(sessionStorage.getItem("task"));
-    let txt = "<th>Task name</th><th>Task details</th><th>Task date</th>";    
+    let txt = "<th>Task name</th><th>Task details</th><th>Task date</th><th>Task Status</th> ";    
     for (let x of arr) {
         if(x["task"].includes(word)){
-            txt += "<tr><td>" + x["task"] + "</td><td>" + x["details"] + "</td><td>" + x["date"] + "</td> </tr>";
+            txt += "<tr><td>" + x["task"] + "</td><td>" + x["details"] + "</td><td>" + x["date"] + "</td><td>" + x["status"] + "</td> </tr>";
         }
     }
     document.getElementById("searchTable").innerHTML = txt;
@@ -403,10 +438,10 @@ function searchByName(){
 function searchByDate(){
     word = document.getElementById("searchInpName").value;
     let arr = JSON.parse(sessionStorage.getItem("task"));
-    let txt = "<th>Task name</th><th>Task details</th><th>Task date</th>";    
+    let txt = "<th>Task name</th><th>Task details</th><th>Task date</th><th>Task Status</th>";    
     for (let x of arr) {
         if(x["date"] == word){
-            txt += "<tr><td>" + x["task"] + "</td><td>" + x["details"] + "</td><td>" + x["date"] + "</td> </tr>";
+            txt += "<tr><td>" + x["task"] + "</td><td>" + x["details"] + "</td><td>" + x["date"] + "</td><td>" + x["status"] + "</td> </tr>";
         }
     }
     document.getElementById("searchTable").innerHTML = txt;
