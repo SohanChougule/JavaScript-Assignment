@@ -7,7 +7,6 @@ if (JSON.parse(localStorage.getItem("task")) == null) {
 }
 
 function RegFormValidation() {
-    console.log("in validate function")
     let uname = document.getElementById("uname");
 
     let fname = document.getElementById("fname");
@@ -106,6 +105,7 @@ function LoginFormValidation() {
 
 
 function displayTask() {
+    isSession();
     let arr = JSON.parse(localStorage.getItem("task"));
     let userid = sessionStorage.getItem("userid");
     let txt = "<th>Task name</th><th>Task details</th><th>Task date</th><th>Status</th>";
@@ -160,7 +160,7 @@ function addTask() {
 }
 
 function viewUpdate(){
-    
+    isSession();
     let task = JSON.parse(sessionStorage.getItem("task"));
     let txt =""
     
@@ -186,7 +186,7 @@ function updateTask(){
     let tab = document.getElementById("updateTaskTable").getElementsByTagName("input");
     let taskobj = JSON.parse(sessionStorage.getItem("task"));
     let rlen = taskobj.length;
-    console.log(rlen);
+    
     obj = []
     for(let i =0;i<(rlen*6);i+=6){
         let id  = tab[i].value - 1;
@@ -212,7 +212,7 @@ function updateTask(){
         "date" : date,
         "status":status
         };
-        console.log(task);
+        
         obj.push(task);
     }
   
@@ -238,6 +238,7 @@ function updateTask(){
 
 
 function deleteView(){
+    isSession();
     let task = JSON.parse(sessionStorage.getItem("task"));
     let txt ="<tr><th>Task Id</th><th>Task</th><th>Task details</th><th>Date</th><th>Status</th><th>Select</th></tr>"
     
@@ -272,7 +273,6 @@ function deleteTask(){
         }
         count++;
     }
-    console.log(ltask);
     localStorage.setItem("task",JSON.stringify(ltask));
     sessionStorage.setItem("task",JSON.stringify(ltask));
     alert("Deleted tasks");
@@ -280,12 +280,13 @@ function deleteTask(){
 }
 
 function profileDisplay(){
+    isSession();
     let userid = sessionStorage.getItem("userid");
     let users = JSON.parse(localStorage.getItem("users"));
     let count =0;
     for (let x of users){
         if(count == userid){
-            console.log("user is",x["uname"]);
+            
             tables =document.getElementsByTagName("td");
             tables[0].innerText = x["uname"];
             tables[1].innerText = x["fname"] + " " + x["lname"];
@@ -297,12 +298,13 @@ function profileDisplay(){
 }
 
 function profileEditDisplay(){
+    isSession();
     let userid = sessionStorage.getItem("userid");
     let users = JSON.parse(localStorage.getItem("users"));
     let count =0;
     for (let x of users){
         if(count == userid){
-            console.log("user is",x["uname"]);
+           
             tables =document.getElementsByTagName("input");
             document.getElementById("username").innerText = x["uname"];
             tables[0].value = x["fname"];
@@ -328,13 +330,13 @@ function editProfile(){
     let count =0;
     
     for(let x of users){
-        console.log("in users")
+       
         if(count==userid){
             x["fname"] = fname;
             x["lname"] = lname;
             x["address"] = address;
             x["gender"] = gender;
-            console.log(x)
+            
         }
         count++;
     }
@@ -451,3 +453,11 @@ function logout() {
     sessionStorage.clear();
 }
 
+function isSession(){
+    userid = sessionStorage.getItem("userid");
+    console.log(userid);
+    if(userid === null ){
+        alert("Please Login !!");
+        window.location.href = "login.html";
+    }
+}
