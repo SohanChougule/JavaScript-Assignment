@@ -69,7 +69,7 @@ function RegFormValidation() {
 
         localStorage.setItem("users", JSON.stringify(users));
 
-        window.location.href = "login.html"
+        window.location.href = "login.html";
     }
 }
 
@@ -108,12 +108,12 @@ function LoginFormValidation() {
 function displayTask() {
     let arr = JSON.parse(localStorage.getItem("task"));
     let userid = sessionStorage.getItem("userid");
-    let txt = "<th>Task name</th><th>Task details</th><th>Task date</th>";
+    let txt = "<th>Task name</th><th>Task details</th><th>Task date</th><th>Status</th>";
     let newarr = []
     for (let x of arr) {
         if (x["userid"] == userid) {
             newarr.push(x);
-            txt += "<tr><td>" + x["task"] + "</td><td>" + x["details"] + "</td><td>" + x["date"] + "</td> </tr>"
+            txt += "<tr><td>" + x["task"] + "</td><td>" + x["details"] + "</td><td>" + x["date"] + "</td><td>" + x["status"] + "</td> </tr>"
         }
     }
     sessionStorage.setItem("task", JSON.stringify(newarr));
@@ -147,7 +147,8 @@ function addTask() {
             "taskid": cnt,
             "task": tname.value,
             "details": tdetails.value,
-            "date": tdate.value
+            "date": tdate.value,
+            "status":"pending"
         };
         task.push(obj)
         localStorage.setItem("task", JSON.stringify(task));
@@ -159,12 +160,24 @@ function addTask() {
 }
 
 function viewUpdate(){
-    console.log("in view function");
+    
     let task = JSON.parse(sessionStorage.getItem("task"));
     let txt =""
     
     for(let x of task){
-        txt += "<input value='" + x["taskid"] + "' readonly><input type='text' value='" + x["task"] + "'><input type='text' value='" + x["details"] + "'><input type='date' value='" + x["date"] + "'> "
+        let a = 1 + x["taskid"];
+        let b,c;
+        if(x["status"] == "done"){
+            b = "checked";
+            c = "";
+
+        }else{
+            b = "";
+            c = "checked"
+        }
+        
+        
+        txt += "<input value='" + a + "' readonly><input type='text' value='" + x["task"] + "'><input type='text' value='" + x["details"] + "'><input type='date' value='" + x["date"] + "'><span class='statusSpan'><input type='radio'  name='status" + a +"' value='pending' "+ c+">Pending<input type='radio'  name='status" + a +"' value='done' " + b +">Done</span><br> "
     }
     document.getElementById("updateTaskTable").innerHTML = txt;
 }
@@ -173,16 +186,33 @@ function updateTask(){
     let tab = document.getElementById("updateTaskTable").getElementsByTagName("input");
     let taskobj = JSON.parse(sessionStorage.getItem("task"));
     let rlen = taskobj.length;
+    console.log(rlen);
     obj = []
-    for(let i =0;i<(rlen*4);i+=4){
-        let id  = tab[i].value;
+    for(let i =0;i<(rlen*6);i+=6){
+        let id  = tab[i].value - 1;
         let task  = tab[i+1].value;
         let details  = tab[i+2].value;
         let date  = tab[i+3].value;
+        b = i +1;
+        let a = "status" + b;
+        let status;
+            
+    
+        if(tab[i+4].checked){
+            status = tab[i+4].value;
+        }
+        if(tab[i+5].checked){
+            status = tab[i+5].value;
+        }
+        
+    
         task = {"taskid" : id,
         "task" : task,
         "details" : details,
-        "date" : date};
+        "date" : date,
+        "status":status
+        };
+        console.log(task);
         obj.push(task);
     }
   
@@ -195,10 +225,11 @@ function updateTask(){
                 x["task"] = y["task"];
                 x["details"] = y["details"];
                 x["date"] = y["date"];
+                x["status"] = y["status"];
             }
         }
     }}
-    console.log(ltask)
+    
     localStorage.setItem("task",JSON.stringify(ltask));
     sessionStorage.setItem("task",JSON.stringify(ltask));
     
@@ -208,10 +239,11 @@ function updateTask(){
 
 function deleteView(){
     let task = JSON.parse(sessionStorage.getItem("task"));
-    let txt ="<tr><th>Task Id</th><th>Task</th><th>Task details</th><th>Date</th><th>Select</th></tr>"
+    let txt ="<tr><th>Task Id</th><th>Task</th><th>Task details</th><th>Date</th><th>Status</th><th>Select</th></tr>"
     
     for(let x of task){
-        txt += "<tr><td style='none'>" + x["taskid"] + "</td><td>" + x["task"] + "</td><td>" + x["details"] + "</td><td>" + x["date"] + "</td><td><input type = 'checkbox' class ='deleteItem' value='"+ x["taskid"] +"'</td></tr>"
+        let a = 1 + x["taskid"];
+        txt += "<tr><td style='none'>" + a + "</td><td>" + x["task"] + "</td><td>" + x["details"] + "</td><td>" + x["date"] + "</td><td>" + x["status"] + "</td><td><input type = 'checkbox' class ='deleteItem' value='"+ x["taskid"] +"'</td></tr>"
     }
     document.getElementById("DeleteView").innerHTML = txt;
 }
@@ -308,7 +340,7 @@ function editProfile(){
     }
     localStorage.setItem("users",JSON.stringify(users));
     alert("Updated");
-        
+    window.location.href = "profile.html"
 }
 
 
@@ -348,7 +380,7 @@ function viewBy(){
 function searchBy(){
     searchTaskBy = document.getElementById("searchTask").value;
     if(searchTaskBy == "taskName"){
-        document.getElementById("viewSearch").innerHTML = "<input type = 'text' id = 'searchInpName' oninput='searchByName()' style='float:right'>";
+        document.getElementById("viewSearch").innerHTML = "<input type = 'text' id = 'searchInpName' oninput='searchByName()' style='float:right' placeholder='enter task'>";
     }
     if(searchTaskBy == "taskDate"){
         document.getElementById("viewSearch").innerHTML = "<input type = 'date' id = 'searchInpName' onchange='searchByDate()' style='float:right'>";

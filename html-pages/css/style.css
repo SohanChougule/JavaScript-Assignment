@@ -29,7 +29,7 @@
 }
 
 .addTaskFormcontainer{
-    width:25%;
+    width:250px;
     padding-left: 10px;
     padding-right: 10px;   
     border-style: double;
@@ -39,7 +39,7 @@
 
 .viewTaskFormcontainer{
     border-style: double;
-    width: 35%;
+    width: 400px;
     float:right;
     margin-left: 20px;
     background-color: honeydew;
@@ -49,8 +49,14 @@
 #ViewTable td, th{
     width:180px;
     border-style:solid;
-    border-color: rgb(44, 18, 68);
+    border-width: 1.5px;
 }
+
+#searchTable td, th{
+    width:180px;
+    border-width: 1.5px;
+    border-style:solid;
+} 
 
 .navbar{
     background-color: cornsilk;
@@ -160,3 +166,13 @@
     width:130px;
 }
 
+.statusSpan{
+    margin-left: 2px;
+    border-width: 2px;
+    border-style: solid;
+}
+
+.tablefield1{
+    width: 390px;
+    border-width: 2px;
+}
