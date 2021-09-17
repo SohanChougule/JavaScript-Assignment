@@ -11,7 +11,7 @@
 <body>
     <div class="regFormcontainer">
     <h2>Login</h2>
-    <form name = "loginForm" action="" >
+    <form name = "loginForm" action="index.html" onsubmit="return LoginFormValidation()">
         <p>
             User Name : <br><input type="text" class="inp" id="luname" >
             <br>
@@ -20,7 +20,7 @@
             <br>
             <span class="errmsg" id="loginerrmsg"></span>
             <br>
-            <input type="button" value="Submit" name="Submit" id="subbtn" onclick="LoginFormValidation()">
+            <input type="submit" value="Submit">
             <input type="reset" value="Reset" name="Reset" />
             <p>Not a User yet ? <a href="registration.html" >Sign Up Here</a></p>
         </p>

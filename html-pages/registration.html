@@ -12,7 +12,7 @@
 <body>
     <div class="regFormcontainer">
     <h2>Registeration Form</h2>
-    <form name = "reForm" action="" >
+    <form name = "reForm" action="login.html" onsubmit="return RegFormValidation()" >
 
         <p>
             User Name : <br><input type="text" class="inp" id="uname" >
@@ -52,7 +52,7 @@
             <span class="errmsg" id="adderrmsg"></span>
             
             <br>
-            <input type="button" value="Submit" name="Submit" id="subbtn" onclick="RegFormValidation()">
+            <input type="submit" value="Submit">
             <input type="reset" value="Reset" name="Reset" />
             <p>Already a user ? <a href="login.html" >Login Here</a></p>
         </p>

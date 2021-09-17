@@ -29,30 +29,39 @@ function RegFormValidation() {
     if (!flag) {
         document.getElementById("unameerrmsg").innerText = "Username already taken please try another username";
         uname.focus();
+        return false;
     } else if (uname.value == "") {
         document.getElementById("unameerrmsg").innerText = "Please Enter User Name";
-        fname.focus();
+        uname.focus();
+        return false;
     } else if (password.value == "") {
         document.getElementById("passerrmsg").innerText = "Please Enter Password";
         password.focus();
+        return false;
     } else if (cpassword.value == "") {
         document.getElementById("passerrmsg").innerText = "Please Enter Confirm Password";
         cpassword.focus();
+        return false;
     } else if (cpassword.value !== password.value) {
         document.getElementById("passerrmsg").innerText = "Password and Confirm Password must match";
+        return false;
     } else if (fname.value == "") {
         document.getElementById("fnameerrmsg").innerText = "Please Enter First Name";
         fname.focus();
+        return false;
     } else if (lname.value == "") {
         lname.focus();
         document.getElementById("lnameerrmsg").innerText = "Please Enter Last Name";
+        return false;
     } else if (gender.value == "") {
         document.getElementById("gendererrmsg").innerText = "Please Select gender";
         gender.focus();
+        return false;
     }
     else if (address.value == "") {
         address.focus();
         document.getElementById("adderrmsg").innerText = "Please Enter Address";
+        return false;
     } else {
         confirm("Are you sure ?")
         let obj = {
@@ -67,8 +76,7 @@ function RegFormValidation() {
         users.push(obj);
 
         localStorage.setItem("users", JSON.stringify(users));
-
-        window.location.href = "login.html";
+        return true;
     }
 }
 
@@ -79,26 +87,39 @@ function LoginFormValidation() {
 
     if (uname.value == "") {
         document.getElementById("loginerrmsg").innerText = "Please Enter User Name";
-        fname.focus();
-    } else if (password.value == "") {
-        document.getElementById("loginerrmsg").innerText = "Please Enter Password";
-        password.focus();
+        uname.focus();
+        return false;
+    }else if(password.value == "") {
+            document.getElementById("loginerrmsg").innerText = "Please Enter Password";
+            password.focus();
+            return false;
+        
     } else {
         let count = 0;
         for (let x of arr) {
             if (x["uname"] == uname.value) {
                 if (x["password"] == password.value) {
                     sessionStorage.setItem("luser", JSON.stringify(x));
-                    window.location.href = "index.html";
                     sessionStorage.setItem("userid", count);
-                    break;
+                    let task = JSON.parse(localStorage.getItem("task"));
+                    newtaskarr = [];
+                    for(var y of task){
+                        if(y["userid"] = userid){
+                            newtaskarr.push(y);
+                        }
+                    }
+                    sessionStorage.setItem("task", JSON.stringify(newtaskarr));
+                    return true;
                 } else {
                     document.getElementById("loginerrmsg").innerHTML = "incorrect password";
+                    return false;
                 }
-            } else {
-                document.getElementById("loginerrmsg").innerHTML = "Invalid Username or password";
-            }
+            }   
             count++;
+        }
+        if(count==arr.length){
+            document.getElementById("loginerrmsg").innerHTML = "invalid username";
+                    return false;
         }
     }
 }
@@ -164,14 +185,8 @@ function addTask() {
         }
 
         let status = "";
-        let dtask = document.getElementById("isDoneTask");
-
-        if (dtask.checked) {
-            status = "done";
-        } else {
-            status = "pending";
-        }
-
+        
+        
         isPublicEle = document.getElementsByName("isTaskPublic");
         let isPublic;
         for (i = 0; i < isPublicEle.length; i++) {
@@ -211,7 +226,7 @@ function addTask() {
                 "task": tname.value,
                 "details": tdetails.value,
                 "date": tdate.value,
-                "status": status,
+                "status": "pending",
                 "isPublic": isPublic,
                 "isReminder": reminder,
                 "reminderDate": reminderDate
@@ -219,6 +234,7 @@ function addTask() {
             console.log(obj);
             task.push(obj);
             localStorage.setItem("task", JSON.stringify(task));
+            sessionStorage.setItem("task", JSON.stringify(task));
             alert("Task Added");
             window.location.reload();
         }
@@ -233,33 +249,35 @@ function viewUpdate() {
     let task = JSON.parse(sessionStorage.getItem("task"));
     let txt = ""
 
-
+    let userid = sessionStorage.getItem("userid");
     for (let x of task) {
-        let a = 1 + x["taskid"];
-        let c = "";
-        let checkedPublic = "";
-        let checkedReminder = "";
-        let checkedDate = "";
-        if (x["status"] == "done") {
-            c = "checked";
-        } else {
-            c = "";
+        if(x["userid"] == userid){
+            let a = 1 + x["taskid"];
+            let c = "";
+            let checkedPublic = "";
+            let checkedReminder = "";
+            let checkedDate = "";
+            if (x["status"] == "done") {
+                c = "checked";
+            } else {
+                c = "";
+            }
+
+            if (x["isPublic"] == "public") {
+                checkedPublic = "checked";
+            } else {
+                checkedPublic = "";
+
+            }
+            if (x["isReminder"] == "Yes") {
+                checkedReminder = "checked";
+            } else {
+                checkedDate = "disabled";
+            }
+
+
+            txt += "<input value='" + a + "' readonly><input type='text' value='" + x["task"] + "'><input type='text' value='" + x["details"] + "'><input type='date' value='" + x["date"] + "'><span class='statusSpan'><input type='checkbox'  id='status" + a + "' value='pending' " + c + " onchange='isDone(" + a + ")'></span><span class='statusSpan'><input type='checkbox' id='public" + a + "' " + checkedPublic + "></span><span class='statusSpan'><input type='checkbox'  id='reminder" + a + "' " + checkedReminder + " onchange='remDateDisable(" + a + ")'></span> <input type='date' id='remDate" + a + "' value='" + x["reminderDate"] + "' " + checkedDate + "><br> ";
         }
-
-        if (x["isPublic"] == "public") {
-            checkedPublic = "checked";
-        } else {
-            checkedPublic = "";
-
-        }
-        if (x["isReminder"] == "Yes") {
-            checkedReminder = "checked";
-        } else {
-            checkedDate = "disabled";
-        }
-
-
-        txt += "<input value='" + a + "' readonly><input type='text' value='" + x["task"] + "'><input type='text' value='" + x["details"] + "'><input type='date' value='" + x["date"] + "'><span class='statusSpan'><input type='checkbox'  id='status" + a + "' value='pending' " + c + " onchange='isDone(" + a + ")'></span><span class='statusSpan'><input type='checkbox' id='public" + a + "' " + checkedPublic + "></span><span class='statusSpan'><input type='checkbox'  id='reminder" + a + "' " + checkedReminder + " onchange='remDateDisable(" + a + ")'></span> <input type='date' id='remDate" + a + "' value='" + x["reminderDate"] + "' " + checkedDate + "><br> ";
     }
     document.getElementById("updateTaskTable").innerHTML = txt;
 }
@@ -372,10 +390,13 @@ function deleteView() {
     isSession();
     let task = JSON.parse(sessionStorage.getItem("task"));
     let txt = "<tr><th>Task Id</th><th>Task</th><th>Task details</th><th>Date</th><th>Status</th><th>Public or Private</th><th>Reminder</th><th>Reminder Date</th><th>Select</th></tr>"
-
+    let userid = sessionStorage.getItem("userid");
     for (let x of task) {
-        let a = 1 + x["taskid"];
+        if(x["userid"] == userid){
+            let a = 1 + x["taskid"];
         txt += "<tr><td style='none'>" + a + "</td><td>" + x["task"] + "</td><td>" + x["details"] + "</td><td>" + x["date"] + "</td><td>" + x["status"] + "</td><td>" + x["isPublic"] + "</td><td>" + x["isReminder"] + "</td><td>" + x["reminderDate"] + "</td><td><input type = 'checkbox' class ='deleteItem' value='" + x["taskid"] + "'</td></tr>"
+        }
+        
     }
     document.getElementById("DeleteView").innerHTML = txt;
 }
@@ -590,7 +611,7 @@ function viewReminderBy() {
 
 function viewReminder() {
 
-    let arr = JSON.parse(sessionStorage.getItem("task"));
+    
     let txt = "<th>Task name</th><th>Task details</th><th>Task date</th><th>Task Status</th><th>Public or Private</th><th>Reminder</th><th>Reminder Date</th>";
     let today = new Date();
     var dd = today. getDate();
@@ -603,13 +624,17 @@ function viewReminder() {
 
     let date1 = yyyy+"-"+mm+"-"+dd;
     let cnt = 0;
+    let arr = JSON.parse(sessionStorage.getItem("task"));
+    let userid = sessionStorage.getItem("userid");
     for (let x of arr) {
-        if (x["isReminder"] == "Yes") {
-            
-            if((x["reminderDate"]) == (date1)) {
-                cnt++
-                txt += "<tr><td>" + x["task"] + "</td><td>" + x["details"] + "</td><td>" + x["date"] + "</td><td>" + x["status"] + "</td><td>" + x["isPublic"] + "</td><td>" + x["isReminder"] + "</td><td>" + x["reminderDate"] + "</td> </tr>";
-            }            
+        if(x["userid"] == userid){
+            if (x["isReminder"] == "Yes") {
+                
+                if((x["reminderDate"]) == (date1)) {
+                    cnt++
+                    txt += "<tr><td>" + x["task"] + "</td><td>" + x["details"] + "</td><td>" + x["date"] + "</td><td>" + x["status"] + "</td><td>" + x["isPublic"] + "</td><td>" + x["isReminder"] + "</td><td>" + x["reminderDate"] + "</td> </tr>";
+                }            
+            }
         }
     }
     if(cnt==0){
