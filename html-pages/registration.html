@@ -5,13 +5,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registeration</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Registration</title>
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>
     <div class="regFormcontainer">
-    <h2>Registeration Form</h2>
+    <h2>Registration Form</h2>
     <form name = "reForm" action="login.html" onsubmit="return RegFormValidation()" >
 
         <p>
@@ -51,6 +51,15 @@
             Address : <textarea name="address" id="address" cols="30" rows="5" ></textarea>
             <br>
             <span class="errmsg" id="adderrmsg"></span>
+            
+            <br>
+            <br>
+            Profile Image : <input type="file" accept="image/*" onchange="readURL(this);" required="">
+            <br>
+            <br>
+            
+            <img id="preview-img" src="http://placehold.it/180" alt="User Picture" name="user-img" width="300px" height="250px">
+            <span class="errmsg" id="pimgerrmsg"></span>
             
             <br>
             <input type="submit" value="Submit">

@@ -1,45 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Profile</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
+
 <body onload="profileEditDisplay()">
     <h3>Edit Profile</h3>
     <div class="updateUserDetails">
-        <table>
-            <tr>
-                <th>User Name : </th>
-                <td><input class = "profileinp" id="username" disabled></td>
-            </tr>
-            <tr>
-                <th>First Name : </th>
-                <td><input class = "profileinp" type="text"></td>
+        <form  name = "UpdateForm" action ="profile.html" onsubmit="return editProfile()">
+        
+            <table>
+                <tr>
+                    <th>
+                        Profile Image :
+
+                    </th>
+                    <td>
+                        
+                        <img id="profile-img" alt="User Picture" name="user-img" width="300px" height="250px">
+
+                        <span class="errmsg" id="pimgerrmsg"></span>
+
+                        
+
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        User Name :
+                    </th>
+                    <td>
+                        <input type="text" class="inp" id="username" disabled>
+                        <br>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        Password :
+                    </th>
+                    <td>
+                        <input type="text" class="inp" id="password">
+                        <br>
+                        <span class="errmsg" id="passerrmsg"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        Confirm Password :
+                    </th>
+                    <td>
+                        <input type="text" class="inp" id="cpassword">
+                        <br>
+                        <span class="errmsg" id="cpasserrmsg"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        First Name :
+                    </th>
+                    <td>
+                        <input type="text" class="inp" id="fname">
+                        <br>
+                        <span class="errmsg" id="fnameerrmsg"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        Last Name :
+                    </th>
+                    <td>
+                        <input type="text" class="inp" id="lname">
+                        <span class="errmsg" id="lnameerrmsg"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        Gender :
+
+                    </th>
+                    <td>
+                        <select name="gender" id="gender">
+                            <option value="">-</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Others">Others</option>
+
+                        </select>
+
+                        <br>
+
+
+                        <span class="errmsg" id="gendererrmsg"></span>
+
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        Address :
+                    </th>
+                    <td>
+                        <textarea name="address" id="address" cols="30" rows="5"></textarea>
+                        <br>
+                        <span class="errmsg" id="adderrmsg"></span>
+
+                    </td>
+                </tr>
                 
-            </tr>
-            <tr>
-                <th>Last Name : </th>
-                <td><input class = "profileinp"  type="text"></td>
-                
-            </tr>
-            <tr>
-                <th>Address : </th>
-                <td><input class = "profileinp"  type="text"></td>
-                
-            </tr>
-            <tr>
-                <th>Gender : </th>
-                <td><input class = "profileinp"  type="text"></td>
-                
-            </tr>
+            </table>
+
+            <input type="submit" value="Submit">
             
-        </table>
+        
+        </form>
     </div>
-    <button type="submit" onclick="editProfile()">Update</button>
-    <button onclick="location.href ='profile.html'" >Back</button>
+    <br>
+    <button onclick="location.href ='profile.html'">Back</button>
 </body>
 <script src="../js/profileView.js"></script>
+
 </html>

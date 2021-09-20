@@ -24,9 +24,6 @@
 #gender{
     width:72%;
 }
-#subbtn{
-    margin-right: 20px;
-}
 
 .wrapper{
     width:900px;
@@ -157,16 +154,19 @@
 }
 
 .userDetails th{
+    width: 80px;
     border: 1px;
     border-style: none;
 }
 
 .userDetails td{
+    width: 200px;
     border: 1px;
     border-style: none;
 }
 
 .userDetails table{
+    text-align: center;
     margin-top: 80px;
     margin-left: 200px;
     border-style: solid;
@@ -174,10 +174,13 @@
 
 .updateUserDetails th{
     border: solid;
+    width:200px;
     border-width: 1px;
+    padding-left:25px
 }
 
 .updateUserDetails td{
+    width:200px;
     border: solid;
     border-width: 1px;
 }
@@ -199,4 +202,8 @@
     margin-left: 2px;
     border-width: 2px;
     border-style: solid;
+}
+
+#profileImgTableField{
+    width:400px
 }
