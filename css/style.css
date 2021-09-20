@@ -125,6 +125,22 @@
     background-color: lightsteelblue;
 }
 
+.todayContainer{
+    width:500px;
+    background-color: cadetblue;
+    margin-left: 50%;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;   
+    border-style: double;
+    background-color: rgb(181, 222, 176);
+}
+
+#TodayTable td{
+    border-style: solid;
+    border-width: 1px;
+}
+
 #reminderTable td{
     border-style: solid;
     border-width: 1px;
