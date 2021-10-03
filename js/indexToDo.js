@@ -4,12 +4,12 @@ function displayTask() {
     viewToday();
     let arr = JSON.parse(localStorage.getItem("task"));
     let userid = sessionStorage.getItem("userid");
-    let txt = "<th>Task name</th><th>Task details</th><th>Task date</th><th>Status</th><th>Public</th><th>Reminder</th><th>Reminder Date</th>";
+    let txt = "<th>Task name</th><th>Task details</th><th>Task date</th><th>Status</th><th>Public</th><th>Category</th><th>Reminder</th><th>Reminder Date</th>";
     let newarr = []
     for (let x of arr) {
         if (x["userid"] == userid) {
             newarr.push(x);
-            txt += "<tr><td>" + x["task"] + "</td><td>" + x["details"] + "</td><td>" + x["date"] + "</td><td>" + x["status"] + "</td><td>" + x["isPublic"] + "</td><td>" + x["isReminder"] + "</td><td>" + x["reminderDate"] + "</td> </tr>"
+            txt += "<tr><td>" + x["task"] + "</td><td>" + x["details"] + "</td><td>" + x["date"] + "</td><td>" + x["status"] + "</td><td>" + x["isPublic"] + "</td><td>" + x["category"] + "</td><td>" + x["isReminder"] + "</td><td>" + x["reminderDate"] + "</td> </tr>";
         }
     }
     sessionStorage.setItem("task", JSON.stringify(newarr));
@@ -19,17 +19,21 @@ function displayTask() {
 
 
 function viewReminder() {    
-    let txt = "<th>Task name</th><th>Task details</th><th>Task date</th><th>Task Status</th><th>Public or Private</th><th>Reminder</th><th>Reminder Date</th>";
+    let txt = "<th>Task name</th><th>Task details</th><th>Task date</th><th>Task Status</th><th>Public or Private</th><th>Category</th><th>Reminder</th><th>Reminder Date</th>";
     let today = new Date();
     var dd = today. getDate();
     var mm = today. getMonth()+1;
     var yyyy = today. getFullYear();
 
+    if(dd<10){
+        dd="0"+dd
+    }
     if(mm<10){
         mm="0"+mm
     }
 
     let date1 = yyyy+"-"+mm+"-"+dd;
+
     let cnt = 0;
     let arr = JSON.parse(sessionStorage.getItem("task"));
     let userid = sessionStorage.getItem("userid");
@@ -39,13 +43,13 @@ function viewReminder() {
                 
                 if((x["reminderDate"]) == (date1)) {
                     cnt++
-                    txt += "<tr><td>" + x["task"] + "</td><td>" + x["details"] + "</td><td>" + x["date"] + "</td><td>" + x["status"] + "</td><td>" + x["isPublic"] + "</td><td>" + x["isReminder"] + "</td><td>" + x["reminderDate"] + "</td> </tr>";
+                    txt += "<tr><td>" + x["task"] + "</td><td>" + x["details"] + "</td><td>" + x["date"] + "</td><td>" + x["status"] + "</td><td>" + x["isPublic"] + "</td><td>" + x["category"] + "</td><td>" + x["isReminder"] + "</td><td>" + x["reminderDate"] + "</td> </tr>";
                 }            
             }
         }
     }
     if(cnt==0){
-        txt = "No Task For Today";
+        txt = "No Reminder's For Today";
     }
 
     document.getElementById("reminderTable").innerHTML = txt;
@@ -105,6 +109,8 @@ function addTask() {
 
         }
 
+        let category = document.getElementById("category").value;
+
         if (flag) {
             obj = {
                 "userid": userid,
@@ -113,6 +119,7 @@ function addTask() {
                 "details": tdetails.value,
                 "date": tdate.value,
                 "status": "pending",
+                "category": category,
                 "isPublic": isPublic,
                 "isReminder": reminder,
                 "reminderDate": reminderDate
@@ -148,7 +155,7 @@ function isReminder() {
 }
 
 function viewToday() {    
-    let txt = "<tr><th>Task name</th><th>Task details</th><th>Task date</th><th>Task Status</th><th>Public or Private</th><th>Reminder</th><th>Reminder Date</th><th>Mark as Done</th></tr>";
+    let txt = "<tr><th>Task name</th><th>Task details</th><th>Task date</th><th>Task Status</th><th>Public or Private</th><th>Category</th><th>Reminder</th><th>Reminder Date</th><th>Mark as Done</th></tr>";
     let today = new Date();
     var dd = today. getDate();
     var mm = today. getMonth()+1;
@@ -156,6 +163,9 @@ function viewToday() {
 
     if(mm<10){
         mm="0"+mm
+    }
+    if(dd<10){
+        dd="0"+dd
     }
 
     let date1 = yyyy+"-"+mm+"-"+dd;
@@ -167,7 +177,7 @@ function viewToday() {
             if(x["status"]=="pending"){
                 if((x["date"]) == (date1)) {
                     cnt++
-                    txt += "<tr><td>" + x["task"] + "</td><td>" + x["details"] + "</td><td>" + x["date"] + "</td><td>" + x["status"] + "</td><td>" + x["isPublic"] + "</td><td>" + x["isReminder"] + "</td><td>" + x["reminderDate"] + "</td><td> <input type='checkbox' value=" + x["taskid"]+" name='doCheck' ></td> </tr>";
+                    txt += "<tr><td>" + x["task"] + "</td><td>" + x["details"] + "</td><td>" + x["date"] + "</td><td>" + x["status"] + "</td><td>" + x["isPublic"] + "</td><td>" + x["category"] + "</td><td>" + x["isReminder"] + "</td><td>" + x["reminderDate"] + "</td><td> <input type='checkbox' value=" + x["taskid"]+" name='doCheck' ></td> </tr>";
                 }
             }
                         

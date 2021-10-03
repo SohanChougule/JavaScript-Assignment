@@ -2,12 +2,12 @@
 function deleteView() {
     isSession();
     let task = JSON.parse(sessionStorage.getItem("task"));
-    let txt = "<tr><th>Task Id</th><th>Task</th><th>Task details</th><th>Date</th><th>Status</th><th>Public or Private</th><th>Reminder</th><th>Reminder Date</th><th>Select</th></tr>"
+    let txt = "<tr><th>Task Id</th><th>Task</th><th>Task details</th><th>Date</th><th>Status</th><th>Public or Private</th><th>Category</th><th>Reminder</th><th>Reminder Date</th><th>Select</th></tr>"
     let userid = sessionStorage.getItem("userid");
     for (let x of task) {
         if(x["userid"] == userid){
             
-        txt += "<tr><td style='none'>" + x["taskid"] + "</td><td>" + x["task"] + "</td><td>" + x["details"] + "</td><td>" + x["date"] + "</td><td>" + x["status"] + "</td><td>" + x["isPublic"] + "</td><td>" + x["isReminder"] + "</td><td>" + x["reminderDate"] + "</td><td><input type = 'checkbox' class ='deleteItem' value='" + x["taskid"] + "'</td></tr>"
+        txt += "<tr><td style='none'>" + x["taskid"] + "</td><td>" + x["task"] + "</td><td>" + x["details"] + "</td><td>" + x["date"] + "</td><td>" + x["status"] + "</td><td>" + x["isPublic"] + "</td><td>" + x["category"] + "</td><td>" + x["isReminder"] + "</td><td>" + x["reminderDate"] + "</td><td><input type = 'checkbox' class ='deleteItem' value='" + x["taskid"] + "'</td></tr>"
         }
         
     }

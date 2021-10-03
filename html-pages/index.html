@@ -10,21 +10,20 @@
 </head>
 
 <body onload="displayTask()">
-    <header>
+    
         <div class="navbar">
             <ul>
                 <li><a class="active" href="#">HOME</a></li>
                 <li><a href="viewTask.html">View Task</a></li>
-                <li><a href="updateTask.html" >Update task</a></li>
+                <li><a href="updateTask.html">Update task</a></li>
                 <li><a href="deleteTask.html">Delete Task</a></li>
                 <li><a href="profile.html">Profile</a></li>
                 <li><a href="login.html" onclick="logout()">Logout</a></li>
             </ul>
         </div>
-    </header>
     
     <br><br>
-    
+
     <h4>To-Do</h4>
     <div class="wrapper">
         <div class="addTaskFormcontainer">
@@ -35,37 +34,53 @@
                     <br>
                     <br>
                     Task Details : <br>
-                    <textarea type="text" class="inp" id="taskdetails" cols="30" rows="5" >
+                    <textarea type="text" class="inp" id="taskdetails" cols="30" rows="5">
                     </textarea>
                     <br>
                     <br>
                     Date : <br><input type="date" class="inp" id="taskdate" onchange="setReminderMax()">
                     <br><br>
-                     
+                    Category :
+                    <select name="category" id="category">
+                        <option value="Not important and not urgent.">Not important and not urgent.
+                        </option>
+                        <option value="Time sensitive but less important.">
+                            Time sensitive but less important.
+                        </option>
+                        <option value="Important but not time sensitive.">Important but not time sensitive.
+                        </option>
+                        <option value="Urgent and important.">Urgent and important.
+                        </option>
+
+                    </select>
+
+                    <br><br>
+
                     <label for="isTaskPublic"> Is Public : </label>
-                    <input type="radio" name ="isTaskPublic" value ="public" checked>Yes
-                    <input type="radio" name ="isTaskPublic" value="private">No
+                    <input type="radio" name="isTaskPublic" value="public" checked>Yes
+                    <input type="radio" name="isTaskPublic" value="private">No
                     <br>
                     <br>
                     <label for="isTaskReminder"> Reminder ? </label>
-                    <input type="radio" name ="isTaskReminder" value ="reminderYes" onchange="isReminder()">Yes
-                    <input type="radio" name ="isTaskReminder" value="reminderNo" checked  onchange="isReminder()">No
+                    <input type="radio" name="isTaskReminder" value="reminderYes" onchange="isReminder()">Yes
+                    <input type="radio" name="isTaskReminder" value="reminderNo" checked onchange="isReminder()">No
                     <br>
                     <br>
-                    Reminder Date : <br><input type="date" class="inp" id="taskReminderdate" min=Date() disabled = true  required>
+                    Reminder Date : <br><input type="date" class="inp" id="taskReminderdate" min=Date() disabled=true
+                        required>
                     <br><br>
-                    
+
                     <span class="errmsg" id="taskerrmsg"></span>
-    
+
                     <br>
                     <br>
                     <span class="errmsg" id="taskerrmsg"></span>
-    
+
                     <br>
-                    
+
                     <input type="button" value="Submit" name="Submit" id="subbtn" onclick="addTask()">
                     <input type="reset" value="Reset" name="Reset" />
-    
+
                     <script>
                         var today = new Date();
                         var dd = today.getDate();
@@ -80,43 +95,47 @@
                         today = yyyy + '-' + mm + '-' + dd;
                         document.getElementById("taskdate").setAttribute("min", today);
                         document.getElementById("taskReminderdate").setAttribute("min", today);
-                        
+
                     </script>
                 </p>
             </form>
         </div>
-        <div class="reminderContainer">
-            <h2>Reminder</h2>
-            <table id="reminderTable">
-
-            </table>
+    
+        <div class="container">
+            <div class="reminderContainer">
+                <h2>Reminder</h2>
+                <table id="reminderTable">
+    
+                </table>
+            </div>
+            <br>
+            <div class="todayContainer">
+                <h2>Today's Task</h2>
+                <table id="TodayTable">
+    
+                </table>
+                <br>
+                <button type="submit" onclick="DoTask()" style="float: right;">Done</button>
+                <br>
+                <br>
+            </div>
+            
         </div>
     </div>
-    
     <div class="wrapper">
-        <div class="todayContainer">
-            <h2>Today's Task</h2>
-            <table id="TodayTable">
-
-            </table>
-            <br>
-            <button type="submit" onclick="DoTask()" style="float: right;">Done</button>
-            <br>
-            <br>
-        </div>
-        <div class="viewTaskFormcontainer" >
-       
-            <h2>View To-Do task</h2>
+        <div class="viewTaskFormcontainer">
+    
+            <h2>View All To-Do task</h2>
             <table id="ViewTable">
-                
+
             </table>
         </div>
     </div>
-    
+
 
 </body>
 <script src="../js/indexToDo.js">
-  
+
 </script>
 
 </html>

@@ -26,15 +26,14 @@
 }
 
 .wrapper{
-    width:900px;
+    width:100%;
     margin-top: 20px;
-    margin-bottom: 20px;
-    
+    float: left;
 }
 
 .addTaskFormcontainer{
     width:250px;
-    margin-left: 10%;
+    margin-left: 50px;
     padding-left: 10px;
     padding-right: 10px;   
     border-style: double;
@@ -44,9 +43,9 @@
 
 .viewTaskFormcontainer{
     border-style: double;
-    width: 650px;
-    float:left;
-    margin-left: 10%;
+    width: 1100px;
+ 
+    margin-left: 50px;
     margin-top: 30px;
     background-color: honeydew;
     text-align: center;
@@ -111,13 +110,24 @@
 .tablefield{
     border: 2px;
     border-style: solid;
-    width:150px
+    width:120px
+}
+
+.tablefield1{
+    border: 2px;
+    border-style: solid;
+    width:200px;
+}
+
+.container{
+    margin-left: 50px;
+    float: left;
 }
 
 .reminderContainer{
-    width:500px;
+    width:700px;
     background-color: cadetblue;
-    margin-left: 50%;
+    float: left;
     padding-left: 10px;
     padding-right: 10px;
     padding-bottom: 10px;   
@@ -126,9 +136,10 @@
 }
 
 .todayContainer{
-    width:500px;
+    float: left;
+    width:700px;
     background-color: cadetblue;
-    margin-left: 50%;
+    margin-top: 10px;
     padding-left: 10px;
     padding-right: 10px;
     padding-bottom: 10px;   
@@ -149,7 +160,7 @@
 #updateTaskTable input{
     margin-left: 2px;
     margin-top: 2px;
-    width: 148px;
+    width: 118px;
     border-style: solid;
     border-width: 2px;
     border-color: black;
@@ -222,4 +233,12 @@
 
 #profileImgTableField{
     width:400px
+}
+
+.categorySelect{
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+    margin-left: 2.5px;
+    width:200px;
 }

@@ -28,13 +28,44 @@ function viewUpdate() {
             } else {
                 checkedDate = "disabled";
             }
+            let selecta = "";
+            let selectb = "";
+            let selectc = "";
+            let selectd = "";
+            if(x["category"] == "Not important and not urgent."){
+                selecta = "selected";
+            }else if(x["category"] == "Time sensitive but less important."){
+                selectb = "selected";
+            }else if(x["category"] == "Important but not time sensitive."){
+                selectc = "selected";
+            }else if(x["category"] == "Urgent and important."){
+                selectd = "selected";
+            }
+
+            
+            
 
 
-            txt += "<input value='" + x["taskid"] + "' readonly><input type='text' value='" + x["task"] + "'><input type='text' value='" + x["details"] + "'><input type='date' value='" + x["date"] + "'><span class='statusSpan'><input type='checkbox'  id='status" + x["taskid"] + "' value='pending' " + c + " onchange='isDone(" + x["taskid"] + ")'></span><span class='statusSpan'><input type='checkbox' id='public" + x["taskid"] + "' " + checkedPublic + "></span><span class='statusSpan'><input type='checkbox'  id='reminder" + x["taskid"] + "' " + checkedReminder + " onchange='remDateDisable(" + x["taskid"] + ")'></span> <input type='date' id='remDate" + x["taskid"] + "' value='" + x["reminderDate"] + "' " + checkedDate + "><br> ";
+            txt += "<input value='" + x["taskid"] + "' readonly><input type='text' value='" + x["task"] + "'><input type='text' value='" + x["details"] + "'><input type='date' value='" + x["date"] + "'><span class='statusSpan'><input type='checkbox'  id='status" + x["taskid"] + "' value='pending' " + c + " onchange='isDone(" + x["taskid"] + ")'></span><span class='statusSpan'><input type='checkbox' id='public" + x["taskid"] + "' " + checkedPublic + "></span>" + 
+            `<select class="categorySelect" name="category` + x["taskid"] + `" id="category` + x["taskid"] + `">
+                        <option value="Not important and not urgent." ` + selecta+ `>Not important and not urgent.
+                        </option>
+                        <option value="Time sensitive but less important." ` + selectb+ `>
+                            Time sensitive but less important.
+                        </option>
+                        <option value="Important but not time sensitive." ` + selectc+ `>Important but not time sensitive.
+                        </option>
+                        <option value="Urgent and important." ` + selectd+ `>Urgent and important.
+                        </option>
+
+                    </select>
+            
+            ` + "<span class='statusSpan'><input type='checkbox'  id='reminder" + x["taskid"] + "' " + checkedReminder + " onchange='remDateDisable(" + x["taskid"] + ")'></span> <input type='date' id='remDate" + x["taskid"] + "' value='" + x["reminderDate"] + "' " + checkedDate + "><br> ";
         }
     }
     document.getElementById("updateTaskTable").innerHTML = txt;
 }
+
 
 function isDone(a) {
     let doneObj = "status" + a;
@@ -81,7 +112,7 @@ function updateTask() {
             status = "pending";
         }
         
-
+        let categoryvar = document.getElementById("category" + id).value;
         
         let pubvar = document.getElementById("public" + id);
 
@@ -107,6 +138,7 @@ function updateTask() {
             "task": task,
             "details": details,
             "date": date,
+            "category":categoryvar,
             "status": status,
             "isPublic": isPublic,
             "isReminder": isReminder,
@@ -128,6 +160,8 @@ function updateTask() {
                     x["isPublic"] = y["isPublic"];
                     x["isReminder"] = y["isReminder"];
                     x["reminderDate"] = y["reminderDate"];
+                    x["category"] = y["category"];
+                    
                 }
             }
         }
